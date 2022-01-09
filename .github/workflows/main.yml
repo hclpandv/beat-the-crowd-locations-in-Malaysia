@@ -11,3 +11,6 @@ jobs:
 
       - name: Get list of existing updates
         run: Get-Content .\existingUpdates.txt
+      
+      - name: Install Windows Module "MSCatalog"
+        run: Install-Module -Name "MSCatalog"
