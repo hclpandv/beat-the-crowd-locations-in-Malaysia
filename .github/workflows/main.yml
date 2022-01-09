@@ -13,4 +13,4 @@ jobs:
         run: Get-Content .\existingUpdates.txt
       
       - name: Install Windows Module "MSCatalog"
-        run: Install-Module -Name "MSCatalog"
+        run: Install-Module MSCatalog -Scope CurrentUser -Force -Verbose
