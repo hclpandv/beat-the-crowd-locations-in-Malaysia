@@ -1,0 +1,13 @@
+name: FindWindowsUpdates
+on:
+  push:
+    branches: 
+    - main
+jobs:
+  terraform:
+    runs-on: windows-2019
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Get list of existing updates
+        run: Get-Content .\existingUpdates.txt
