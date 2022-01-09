@@ -14,3 +14,10 @@ jobs:
       
       - name: Install Windows Module "MSCatalog"
         run: Install-Module MSCatalog -Scope CurrentUser -Force -Verbose
+        
+      - name: Search for latest windows updates
+        run: | 
+          Get-Content .\existingUpdates.txt | foreach-object {
+              echo "`n Search Result for $_ `n"
+              Get-MSCatalogUpdate -Search $_
+          }
