@@ -28,27 +28,30 @@ jobs:
           echo "** Updates Available for Windows Server 2016 x64 **"
           echo "***************************************************"
 
-          Get-MSCatalogUpdate -Search "Cumulative Update for Windows Server 2016 for x64-based Systems" | `
-          ?{($_.products -like "*Windows Server 2016*") -and ($_.title -notlike "*Preview*") } | `
-          select Title, LastUpdated, Size, Classification -First 5
+          $Updates2016 = Get-MSCatalogUpdate -Search "Cumulative Update for Windows Server 2016 for x64-based Systems" | `
+          ?{($_.products -like "*Windows Server 2016*") -and ($_.title -notlike "*Preview*") }
+          $Updates2016 | select Title, LastUpdated, Size, Classification -First 5
+          Save-MSCatalogUpdate -Update $Updates2019[0] -Destination ".\"
 
           echo ""
           echo "***************************************************"
           echo "** Updates Available for Windows Server 2019 x64 **"
           echo "***************************************************"
 
-          Get-MSCatalogUpdate -Search "Cumulative Update for Windows Server 2019 for x64-based Systems" | `
-          ?{($_.products -like "*Windows Server 2019*") -and ($_.title -notlike "*Preview*") } | `
-          select Title, LastUpdated, Size, Classification -First 5
+          $Updates2019 = Get-MSCatalogUpdate -Search "Cumulative Update for Windows Server 2019 for x64-based Systems" | `
+          ?{($_.products -like "*Windows Server 2019*") -and ($_.title -notlike "*Preview*") }
+          $Updates2019 | select Title, LastUpdated, Size, Classification -First 5
+          Save-MSCatalogUpdate -Update $Updates2019[0] -Destination ".\"
 
           echo ""
           echo "***************************************************"
           echo "** Updates Available for Windows10Pro 20H2 1903+ **"
           echo "***************************************************"
 
-          Get-MSCatalogUpdate -Search "Cumulative Update for Windows 10 Version 20H2 for x64-based Systems" | `
-          ?{($_.products -like "*Windows 10, version 1903*") -and ($_.title -notlike "*Preview*") } | `
-          select Title, LastUpdated, Size, Classification -First 5
+          $UpdatesWin10 = Get-MSCatalogUpdate -Search "Cumulative Update for Windows 10 Version 20H2 for x64-based Systems" | `
+          ?{($_.products -like "*Windows 10, version 1903*") -and ($_.title -notlike "*Preview*") }
+          $UpdatesWin10 | select Title, LastUpdated, Size, Classification -First 5
+          Save-MSCatalogUpdate -Update $Updates2019[0] -Destination ".\"
       
       - name: Download azcopy.exe 
         run: | 
