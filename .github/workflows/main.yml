@@ -27,11 +27,12 @@ jobs:
           Get-MSCatalogUpdate -Search "Cumulative Update for Windows Server 2019 for x64-based Systems" | ?{$_.products -like "*Windows Server 2019*"} | select Title, Classification, LastUpdated
           $Updates2019 = Get-MSCatalogUpdate -Search "Cumulative Update for Windows Server 2019 for x64-based Systems" | ?{$_.products -like "*Windows Server 2019*"}
           Save-MSCatalogUpdate -Update $Updates2019[0] -Destination ".\"
-          ls
       
       - name: Download azcopy.exe 
         run: | 
+          ls
           Invoke-WebRequest -Uri "https://aka.ms/downloadazcopy-v10-windows" -OutFile AzCopy.zip -UseBasicParsing
           Expand-Archive .\AzCopy.zip .\AzCopy -Force
           Get-ChildItem ./AzCopy/*/azcopy.exe | Move-Item -Destination .
+          ls
           .\azcopy.exe --help
