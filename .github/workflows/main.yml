@@ -40,5 +40,5 @@ jobs:
       - name: Upload msu files to Azure blob
         run: | 
           Write-Output "upload the msu files to blob"
-          & .\azcopy.exe copy *.msu ${{ secrets.BLOB_CONTAINER_URI }}?${{ secrets.SAS_TOKEN }} --overwrite=true
+          & .\azcopy.exe copy *.msu "${{ secrets.BLOB_CONTAINER_URI }}?${{ secrets.SAS_TOKEN }}" --overwrite=true
           if ($?) { Write-Output "Logfile upload successful" }
