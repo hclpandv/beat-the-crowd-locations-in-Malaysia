@@ -22,11 +22,30 @@ jobs:
               Get-MSCatalogUpdate -Search $_
           }
           
-      - name: Search and download for latest windows updates for server 2016 and 2019
+      - name: Search and Show for latest windows updates for server 2016 and 2019 and Win10Pro
         run: | 
-          Get-MSCatalogUpdate -Search "Cumulative Update for Windows Server 2019 for x64-based Systems" | ?{$_.products -like "*Windows Server 2019*"} | select Title, Classification, LastUpdated
-          $Updates2019 = Get-MSCatalogUpdate -Search "Cumulative Update for Windows Server 2019 for x64-based Systems" | ?{$_.products -like "*Windows Server 2019*"}
-          Save-MSCatalogUpdate -Update $Updates2019[0] -Destination ".\"
+          echo "***************************************************"
+          echo "** Updates Available for Windows Server 2016 x64 **"
+          echo "***************************************************"
+
+          Get-MSCatalogUpdate -Search "Cumulative Update for Windows Server 2016 for x64-based Systems" | `
+          ?{($_.products -like "*Windows Server 2016*") -and ($_.title -notlike "*Preview*") }
+
+          echo ""
+          echo "***************************************************"
+          echo "** Updates Available for Windows Server 2019 x64 **"
+          echo "***************************************************"
+
+          Get-MSCatalogUpdate -Search "Cumulative Update for Windows Server 2019 for x64-based Systems" | `
+          ?{($_.products -like "*Windows Server 2019*") -and ($_.title -notlike "*Preview*") }
+
+          echo ""
+          echo "***************************************************"
+          echo "** Updates Available for Windows10Pro 20H2 1903+ **"
+          echo "***************************************************"
+
+          Get-MSCatalogUpdate -Search "Cumulative Update for Windows 10 Version 20H2 for x64-based Systems" | `
+          ?{($_.products -like "*Windows 10, version 1903*") -and ($_.title -notlike "*Preview*") }
       
       - name: Download azcopy.exe 
         run: | 
