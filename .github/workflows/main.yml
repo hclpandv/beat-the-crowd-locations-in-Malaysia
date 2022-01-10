@@ -31,7 +31,7 @@ jobs:
           $Updates2016 = Get-MSCatalogUpdate -Search "Cumulative Update for Windows Server 2016 for x64-based Systems" | `
           ?{($_.products -like "*Windows Server 2016*") -and ($_.title -notlike "*Preview*") }
           $Updates2016 | select Title, LastUpdated, Size, Classification -First 5
-          Save-MSCatalogUpdate -Update $Updates2019[0] -Destination ".\"
+          Save-MSCatalogUpdate -Update $Updates2016[0] -Destination ".\"
 
           echo ""
           echo "***************************************************"
@@ -51,7 +51,7 @@ jobs:
           $UpdatesWin10 = Get-MSCatalogUpdate -Search "Cumulative Update for Windows 10 Version 20H2 for x64-based Systems" | `
           ?{($_.products -like "*Windows 10, version 1903*") -and ($_.title -notlike "*Preview*") }
           $UpdatesWin10 | select Title, LastUpdated, Size, Classification -First 5
-          Save-MSCatalogUpdate -Update $Updates2019[0] -Destination ".\"
+          Save-MSCatalogUpdate -Update $UpdatesWin10[0] -Destination ".\"
       
       - name: Download azcopy.exe 
         run: | 
