@@ -21,6 +21,13 @@ jobs:
               echo "`n Search Result for $_ `n"
               Get-MSCatalogUpdate -Search $_
           }
+          
+      - name: Search and download for latest windows updates for server 2016 and 2019
+        run: | 
+          Get-MSCatalogUpdate -Search "Cumulative Update for Windows Server 2019 for x64-based Systems" | ?{$_.products -like "*Windows Server 2019*"} | select Title, Classification, LastUpdated
+          $Updates2019 = Get-MSCatalogUpdate -Search "Cumulative Update for Windows Server 2019 for x64-based Systems" | ?{$_.products -like "*Windows Server 2019*"} | select Title, Classification, LastUpdated
+          Save-MSCatalogUpdate -Update $Updates[0] -Destination ".\"
+          ls
       
       - name: Download azcopy.exe 
         run: | 
