@@ -29,7 +29,8 @@ jobs:
           echo "***************************************************"
 
           Get-MSCatalogUpdate -Search "Cumulative Update for Windows Server 2016 for x64-based Systems" | `
-          ?{($_.products -like "*Windows Server 2016*") -and ($_.title -notlike "*Preview*") }
+          ?{($_.products -like "*Windows Server 2016*") -and ($_.title -notlike "*Preview*") } | `
+          select Title, LastUpdated, Size, Classification -First 5
 
           echo ""
           echo "***************************************************"
@@ -37,7 +38,8 @@ jobs:
           echo "***************************************************"
 
           Get-MSCatalogUpdate -Search "Cumulative Update for Windows Server 2019 for x64-based Systems" | `
-          ?{($_.products -like "*Windows Server 2019*") -and ($_.title -notlike "*Preview*") }
+          ?{($_.products -like "*Windows Server 2019*") -and ($_.title -notlike "*Preview*") } | `
+          select Title, LastUpdated, Size, Classification -First 5
 
           echo ""
           echo "***************************************************"
@@ -45,7 +47,8 @@ jobs:
           echo "***************************************************"
 
           Get-MSCatalogUpdate -Search "Cumulative Update for Windows 10 Version 20H2 for x64-based Systems" | `
-          ?{($_.products -like "*Windows 10, version 1903*") -and ($_.title -notlike "*Preview*") }
+          ?{($_.products -like "*Windows 10, version 1903*") -and ($_.title -notlike "*Preview*") } | `
+          select Title, LastUpdated, Size, Classification -First 5
       
       - name: Download azcopy.exe 
         run: | 
