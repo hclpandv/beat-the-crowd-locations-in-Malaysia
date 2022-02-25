@@ -14,3 +14,5 @@ Get-MSCatalogUpdate -Search "Cumulative Update for Windows Server 2016 for x64-b
 ?{($_.products -like "*Windows Server 2016*") -and ($_.title -notlike "*Preview*") }
 
 ```
+
+trigger test
